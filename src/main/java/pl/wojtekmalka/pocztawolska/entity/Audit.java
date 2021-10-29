@@ -2,14 +2,10 @@ package pl.wojtekmalka.pocztawolska.entity;
 
 import lombok.Data;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@Entity
 @Embeddable
 @Data
 public class Audit {

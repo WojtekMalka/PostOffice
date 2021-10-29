@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "CLIENTS")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +17,9 @@ public class Client {
     private Integer clientCode;
 
     private ClientStatus clientStatus;
+
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Queue queue;
 
     @Embedded
     private Audit audit = new Audit();
