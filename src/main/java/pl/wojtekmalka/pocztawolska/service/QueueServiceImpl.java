@@ -1,43 +1,22 @@
 package pl.wojtekmalka.pocztawolska.service;
 
-import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.wojtekmalka.pocztawolska.DTO.ClientDTO;
+import pl.wojtekmalka.pocztawolska.controller.dto.ClientDTO;
+import pl.wojtekmalka.pocztawolska.controller.mapper.ClientMapper;
 import pl.wojtekmalka.pocztawolska.entity.Client;
 import pl.wojtekmalka.pocztawolska.entity.Queue;
 import pl.wojtekmalka.pocztawolska.repository.QueueRepository;
 
-import java.util.List;
-
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class QueueServiceImpl implements QueueService {
     private final QueueRepository queueRepository;
 
-    private final ModelMapper modelMapper = new ModelMapper();
-
-    public void addClientToQueue(Long queueId, Client client) {
-        Queue queue = getQueue(queueId);
+    @Override
+    public void addClientIntoQueue(ClientDTO clientDTO) {
+        Queue queue = queueRepository.findById(1L).orElseThrow();
+        Client client = ClientMapper.mapToClient(clientDTO);
         queue.setClient(client);
-        queueRepository.save(queue);
-    }
-
-    public List<ClientDTO> getClientDTOQueueList(Queue queue) {
-        return null;
-    }
-
-    public Integer countActualServiceTime(List<Client> queue) {
-        return null;
-    }
-
-    private ClientDTO mapClientToClientDTO(Client client) {
-        ClientDTO clientDTO = modelMapper.map(client, ClientDTO.class);
-        return clientDTO;
-    }
-
-    private Queue getQueue(Long queueId) {
-        return queueRepository.findById(queueId)
-                .orElseThrow(() -> new RuntimeException("Queue didn't found"));
     }
 }

@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.wojtekmalka.pocztawolska.entity.Client;
 
 @Repository
+public
 interface ClientRepository extends JpaRepository<Client, Long> {
 }

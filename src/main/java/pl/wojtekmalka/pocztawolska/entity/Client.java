@@ -1,12 +1,15 @@
 package pl.wojtekmalka.pocztawolska.entity;
 
-import lombok.Data;
+import lombok.*;
 import pl.wojtekmalka.pocztawolska.dictionary.ClientStatus;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
