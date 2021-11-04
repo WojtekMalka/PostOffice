@@ -1,7 +1,10 @@
 package pl.wojtekmalka.pocztawolska.entity;
 
-import lombok.*;
-import pl.wojtekmalka.pocztawolska.dictionary.ClientStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import pl.wojtekmalka.pocztawolska.dictionary.ClientSpecialStatus;
 
 import javax.persistence.*;
 
@@ -14,16 +17,10 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clientId;
-
     private String name;
+    private Integer authCode;
+    private ClientSpecialStatus specialStatus;
 
-    private Integer clientCode;
-
-    private ClientStatus clientStatus;
-
-    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Queue queue;
-
-    @Embedded
-    private Audit audit = new Audit();
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Ticket ticket;
 }

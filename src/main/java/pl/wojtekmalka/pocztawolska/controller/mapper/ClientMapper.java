@@ -7,7 +7,7 @@ public class ClientMapper {
     public static Client mapToClient(ClientDTO clientDTO) {
         return Client.builder()
                 .name(clientDTO.getName())
-                .clientCode(clientDTO.getClientCode())
+                .authCode(clientDTO.getAuthCode())
                 .build();
     }
 }

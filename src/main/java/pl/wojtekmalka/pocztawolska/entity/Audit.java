@@ -2,23 +2,25 @@ package pl.wojtekmalka.pocztawolska.entity;
 
 import lombok.Data;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Embeddable;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Embeddable
 @Data
+@Embeddable
 public class Audit {
     private String createdOn;
     private String preMerge;
 
     @PrePersist
     void prePersist() {
-        createdOn = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
+        createdOn = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     @PreUpdate
     void preUpdate() {
-        preMerge = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
+        preMerge = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }

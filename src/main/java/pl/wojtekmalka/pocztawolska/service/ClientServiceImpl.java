@@ -8,6 +8,9 @@ import pl.wojtekmalka.pocztawolska.controller.mapper.ClientMapper;
 import pl.wojtekmalka.pocztawolska.entity.Client;
 import pl.wojtekmalka.pocztawolska.repository.ClientRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -20,9 +23,22 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ClientDTO getClient(Long clientId) {
+    public ClientDTO getClientById(Long clientId) {
         Client client = clientRepository.findById(clientId)
                 .orElseThrow(() -> new RuntimeException());
         return ClientDTOMapper.mapToClientDTO(client);
+    }
+
+    @Override
+    public List<ClientDTO> getAllClients() {
+        return clientRepository.findAll()
+                .stream()
+                .map(client -> ClientDTO.builder()
+                        .name(client.getName())
+                        .authCode(client.getAuthCode())
+                        .specialStatus(client.getSpecialStatus())
+                        .build())
+                .collect(Collectors.toList());
+
     }
 }

@@ -8,16 +8,24 @@ import pl.wojtekmalka.pocztawolska.controller.dto.ClientDTO;
 import pl.wojtekmalka.pocztawolska.message.ResponseMessage;
 import pl.wojtekmalka.pocztawolska.service.ClientServiceImpl;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/client")
 public class ClientController {
     private final ClientServiceImpl clientService;
 
-    @GetMapping("/getClient/{id}")
-    ResponseEntity<ClientDTO> getClient(@PathVariable("id") Long clientId) {
-        ClientDTO clientDTO = clientService.getClient(clientId);
+    @GetMapping("/getById/{id}")
+    ResponseEntity<ClientDTO> getClientById(@PathVariable("id") Long clientId) {
+        ClientDTO clientDTO = clientService.getClientById(clientId);
         return ResponseEntity.status(HttpStatus.OK).body(clientDTO);
+    }
+
+    @GetMapping("/getAll")
+    ResponseEntity<List<ClientDTO>> getAllClients() {
+        List<ClientDTO> allClientsDTOs = clientService.getAllClients();
+        return ResponseEntity.status(HttpStatus.OK).body(allClientsDTOs);
     }
 
     @PostMapping("/add")

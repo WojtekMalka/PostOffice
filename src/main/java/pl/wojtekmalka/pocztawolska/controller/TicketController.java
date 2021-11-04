@@ -9,20 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.wojtekmalka.pocztawolska.controller.dto.ClientDTO;
 import pl.wojtekmalka.pocztawolska.message.ResponseMessage;
-import pl.wojtekmalka.pocztawolska.service.ClientServiceImpl;
-import pl.wojtekmalka.pocztawolska.service.QueueServiceImpl;
+import pl.wojtekmalka.pocztawolska.service.TicketServiceImpl;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/queue")
-public class QueueController {
-    private final QueueServiceImpl queueService;
-    private final ClientServiceImpl clientService;
+@RequestMapping("/ticket")
+public class TicketController {
+    private final TicketServiceImpl ticketService;
 
-    @PostMapping("/addClient")
-    ResponseEntity<ResponseMessage> addClientIntoQueue(@RequestBody ClientDTO clientDTO) {
-        queueService.addClientIntoQueue(clientDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("Client added into the queue"));
+    @PostMapping("/addTicket")
+    ResponseEntity<ResponseMessage> createTicket(@RequestBody ClientDTO clientDTO) {
+        ticketService.createTicket(clientDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("Ticket was created"));
     }
 }
 

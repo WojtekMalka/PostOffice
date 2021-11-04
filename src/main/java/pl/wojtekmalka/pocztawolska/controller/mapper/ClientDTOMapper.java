@@ -7,7 +7,7 @@ public class ClientDTOMapper {
     public static ClientDTO mapToClientDTO(Client client) {
     return ClientDTO.builder()
             .name(client.getName())
-            .clientCode(client.getClientCode())
+            .authCode(client.getAuthCode())
             .build();
     }
 }
