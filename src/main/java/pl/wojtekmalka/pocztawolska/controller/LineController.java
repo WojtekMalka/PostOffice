@@ -17,9 +17,4 @@ import java.util.List;
 public class LineController {
     private final LineServiceImpl lineService;
 
-    @GetMapping("/getLine")
-    ResponseEntity<List<Line>> getAllLine() {
-        List<Line> allLine = lineService.getAllLine();
-        return ResponseEntity.status(HttpStatus.OK).body(allLine);
-    }
 }

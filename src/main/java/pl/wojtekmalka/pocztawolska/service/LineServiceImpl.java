@@ -2,33 +2,38 @@ package pl.wojtekmalka.pocztawolska.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.wojtekmalka.pocztawolska.dictionary.ClientSpecialStatus;
-import pl.wojtekmalka.pocztawolska.entity.Client;
 import pl.wojtekmalka.pocztawolska.entity.Line;
 import pl.wojtekmalka.pocztawolska.entity.Ticket;
 import pl.wojtekmalka.pocztawolska.repository.LineRepository;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
 public class LineServiceImpl {
     private final LineRepository lineRepository;
 
-    public List<Line> getAllLine() {
-        return lineRepository.findAll();
+    public Line getLine(Long lineId) {
+        return lineRepository.findById(lineId)
+                .orElseThrow(() -> new NoSuchElementException());
     }
 
-    public void addTicketIntoLine(Ticket ticket) {
-        ClientSpecialStatus specialStatus = ticket.getClient().getSpecialStatus();
-        Arrays.stream(Arrays.stream(ClientSpecialStatus.values())
-                .filter(s -> s.getStatus().equals(specialStatus))
-                .findFirst();
+    private void addTicket(Line line, Ticket ticket) {
+        List<Ticket> lineToUpdate = line.getLine();
+        lineToUpdate.add(findTicketPlaceInLine(ticket),ticket);
 
+        Line.builder()
+                .line(lineToUpdate)
+                .build();
     }
 
+    private Integer findTicketPlaceInLine(Ticket ticket){
+        if (ticket.getClient().getSpecialStatus() != null) {
+
+        }
+        return 1;
+    }
 
 //    private void updateQueue() {
 //        List<Ticket> ticket = ticketRepository.findAll().stream()
