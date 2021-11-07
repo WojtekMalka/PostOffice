@@ -35,20 +35,22 @@ public class LineServiceImpl {
     }
 
     private void checkStatusURGENT(List<Ticket> line, Ticket ticket) {
-        if (ticket.getClient().getSpecialStatus().equals(ClientSpecialStatus.URGENT)
-                && ticket.getClient().getAuthCode().equals(ClientSpecialStatus.URGENT.getStatusAuthCode())) {
+        if (isSpecialStatus(ClientSpecialStatus.URGENT, ticket)) {
             line.add(0, ticket);
         }
     }
 
     private void checkStatusVIP(List<Ticket> line, Ticket ticket) {
-        if (ticket.getClient().getSpecialStatus().equals(ClientSpecialStatus.VIP)
-                && ticket.getClient().getAuthCode().equals(ClientSpecialStatus.VIP)) {
+        if (isSpecialStatus(ClientSpecialStatus.VIP, ticket)) {
             List<Ticket> tempLine = line.stream()
                     .filter(s -> ClientSpecialStatus.VIP.equals(s.getClient().getSpecialStatus()))
                     .sorted((o1, o2) -> o1.getAudit().getCreatedOn().compareTo(o2.getAudit().getCreatedOn()))
                     .collect(Collectors.toList());
             line.addAll(0, line);
         }
+    }
+
+    private boolean isSpecialStatus(ClientSpecialStatus statusName, Ticket ticket) {
+        return statusName.equals(ticket.getClient().getSpecialStatus()) ? true : false;
     }
 }

@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.wojtekmalka.pocztawolska.dictionary.ClientSpecialStatus;
 
 import javax.persistence.*;
 
@@ -19,7 +18,7 @@ public class Client {
     private Long clientId;
     private String name;
     private Integer authCode;
-    private ClientSpecialStatus specialStatus;
+    private String specialStatus;
 
     @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Ticket ticket;

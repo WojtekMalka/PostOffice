@@ -21,6 +21,9 @@ public class Ticket {
     @JoinColumn(name = "clientId")
     private Client client;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Line line;
+
     @Embedded
     private Audit audit;
 }

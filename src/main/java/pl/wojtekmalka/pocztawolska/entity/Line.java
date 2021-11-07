@@ -19,8 +19,7 @@ public class Line {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lineId;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "ticketNumber")
+    @OneToMany(mappedBy = "line", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> line = new ArrayList<>();
 
     private Integer clientPlaceInLine;
