@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Builder
 @Data
@@ -19,8 +17,9 @@ public class Line {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lineId;
 
-    @OneToMany(mappedBy = "line", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ticket> line = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ticketNumber")
+    private Ticket ticket;
 
-    private Integer clientPlaceInLine;
+    private Integer ticketPlaceInLine;
 }

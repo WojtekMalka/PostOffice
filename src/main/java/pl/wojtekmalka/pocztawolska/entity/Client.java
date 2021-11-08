@@ -17,7 +17,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clientId;
     private String name;
-    private Integer authCode;
+    private String authCode;
     private String specialStatus;
 
     @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)

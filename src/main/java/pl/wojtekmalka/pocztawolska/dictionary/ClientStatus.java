@@ -5,10 +5,11 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum ClientSpecialStatus {
-    VIP("VIP", 8888),
-    URGENT("URGENT", 0000);
+public enum ClientStatus {
+    STANDARD("STANDARD", "1111"),
+    VIP("VIP", "8888"),
+    URGENT("URGENT", "0000");
 
     private String status;
-    private Integer statusAuthCode;
+    private String statusAuthCode;
 }

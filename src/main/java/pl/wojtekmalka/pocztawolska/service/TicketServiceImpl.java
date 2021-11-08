@@ -12,6 +12,8 @@ import pl.wojtekmalka.pocztawolska.repository.TicketRepository;
 @Service
 public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
+    private final LineServiceImpl lineService;
+
 
     @Override
     public void createTicket(ClientDTO clientDTO) {
@@ -20,5 +22,6 @@ public class TicketServiceImpl implements TicketService {
                 .audit(new Audit())
                 .build();
         ticketRepository.save(ticket);
+        lineService.addTicketToLine(ticket);
     }
 }

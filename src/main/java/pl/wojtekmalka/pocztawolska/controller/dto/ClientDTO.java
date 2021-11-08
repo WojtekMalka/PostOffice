@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ClientDTO {
     private String name;
-    private Integer authCode;
+    private String authCode;
     private String specialStatus;
 }
 

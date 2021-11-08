@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.wojtekmalka.pocztawolska.controller.dto.ClientDTO;
 import pl.wojtekmalka.pocztawolska.message.ResponseMessage;
+import pl.wojtekmalka.pocztawolska.service.LineServiceImpl;
 import pl.wojtekmalka.pocztawolska.service.TicketServiceImpl;
 
 @RestController
@@ -18,7 +19,7 @@ public class TicketController {
     private final TicketServiceImpl ticketService;
 
     @PostMapping("/addTicket")
-    ResponseEntity<ResponseMessage> createTicket(@RequestBody ClientDTO clientDTO) {
+    ResponseEntity<ResponseMessage> addTicket(@RequestBody ClientDTO clientDTO) {
         ticketService.createTicket(clientDTO);
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("Ticket was created"));
     }
