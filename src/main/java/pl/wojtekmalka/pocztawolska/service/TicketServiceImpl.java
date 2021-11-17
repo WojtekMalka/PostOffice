@@ -22,6 +22,5 @@ public class TicketServiceImpl implements TicketService {
                 .audit(new Audit())
                 .build();
         ticketRepository.save(ticket);
-        lineService.addTicketToLine(ticket);
     }
 }

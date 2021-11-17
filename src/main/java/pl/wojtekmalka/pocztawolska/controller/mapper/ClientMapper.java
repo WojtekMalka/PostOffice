@@ -12,6 +12,4 @@ public class ClientMapper {
                 .specialStatus(ClientAuthorizationServiceImpl.decodeAuthorizationCodeToString(clientDTO))
                 .build();
     }
-
-
 }

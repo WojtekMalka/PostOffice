@@ -21,9 +21,6 @@ public class Ticket {
     @JoinColumn(name = "clientId")
     private Client client;
 
-    @OneToOne(mappedBy = "ticket",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Line line;
-
     @Embedded
     private Audit audit;
 }

@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.wojtekmalka.pocztawolska.entity.Line;
+import pl.wojtekmalka.pocztawolska.entity.Ticket;
 import pl.wojtekmalka.pocztawolska.service.LineServiceImpl;
 
 import java.util.List;
@@ -18,8 +18,8 @@ public class LineController {
     private final LineServiceImpl lineService;
 
     @GetMapping("/getLine")
-    ResponseEntity<List<Line>> getLine() {
-        List<Line> line = lineService.getLine();
-        return ResponseEntity.status(HttpStatus.OK).body(line);
+    ResponseEntity<List<Ticket>> getTicketsInLine() {
+        List<Ticket> ticketsInLine = lineService.getTicketsInLine();
+        return ResponseEntity.status(HttpStatus.OK).body(ticketsInLine);
     }
 }
